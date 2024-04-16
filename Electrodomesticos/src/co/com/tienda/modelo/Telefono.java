@@ -30,6 +30,15 @@ public class Telefono extends Electrodomestico{
     }
 
     public int calcularValor() {
-        return 0;
+        int valor = 0;
+
+        if(this.alcance > 50){
+            valor = this.esInalambrico?300:100;
+        }
+        else{
+            valor = this.esInalambrico?160:60;
+        }
+
+        return valor;
     }
 }

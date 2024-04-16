@@ -63,7 +63,7 @@ public class Pantalla extends Electrodomestico {
     }
 
     public String toString() {
-        new StringBuilder("Pantalla{")
+        return new StringBuilder("Pantalla{")
                 .append("resolucion='").append(resolucion).append('\'')
                 .append(", tipo='").append(tipo).append('\'')
                 .append(", pulgadas='").append(pulgadas).append('\'')
@@ -74,24 +74,5 @@ public class Pantalla extends Electrodomestico {
 
     public int calcularValor() {
         return 0;
-    }
-
-    public static void main(String[] args) {
-        Electrodomestico p = new Pantalla();
-        /*
-        int limite = 100_000;
-        limite = limite + 1;
-        short s = (short) limite;
-        System.out.println(40000);
-        System.out.println(s);
-        System.out.println((byte) 40000);
-        System.out.println("resultado:" + limite + ( 28 - 5 * 4) );
-        System.out.println("linea 1. " + limite);
-        limite++;
-        System.out.println("linea 2. " + limite);
-        System.out.println(p.toString());
-
-         */
-
     }
 }

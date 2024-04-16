@@ -29,6 +29,13 @@ public abstract class Electrodomestico {
         this.marca = marca;
     }
 
+    public String printState(){
+        return new StringBuilder("nombre='")
+                .append(nombre).append('\'')
+                .append(", marca='").append(marca)
+                .append('\'').toString();
+    }
+
     public String toString() {
         /* return "Electrodomestico{" +
                 "nombre='" + nombre + '\'' +
@@ -37,8 +44,7 @@ public abstract class Electrodomestico {
 
         */
         return new StringBuilder("Electrodomestico{")
-                .append("nombre='").append(nombre).append('\'')
-                .append(", marca='").append(marca).append('\'')
+                .append(this.printState())
                 .append('}').toString(); // 1 StringBuilder + 5 constantes
     }
 

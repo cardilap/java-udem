@@ -30,6 +30,6 @@ public abstract class Nevera extends Electrodomestico {
     }
 
     public int calcularValor() {
-        return 0;
+        return this.volumen>400?1200:850;
     }
 }

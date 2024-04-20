@@ -1,6 +1,6 @@
 package co.com.tienda.modelo;
 
-public abstract class Nevera extends Electrodomestico {
+public class Nevera extends Electrodomestico {
     public int volumen;
     public int altura;
     public boolean nofrost;
@@ -31,5 +31,15 @@ public abstract class Nevera extends Electrodomestico {
 
     public int calcularValor() {
         return this.volumen>400?1200:850;
+    }
+
+    @Override
+    public String toString() {
+        return "Nevera{" +
+                "volumen=" + volumen +
+                ", altura=" + altura +
+                ", nofrost=" + nofrost +
+                super.printState() +
+                '}';
     }
 }

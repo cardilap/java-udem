@@ -44,4 +44,15 @@ public class EquipoSonido extends Electrodomestico{
         }
         return 100;
     }
+
+    @Override
+    public String toString() {
+        return "EquipoSonido{" +
+                "potencia=" + potencia +
+                ", nroBafles=" + nroBafles +
+                ", tieneUSB=" + tieneUSB +
+                ", tieneBlueTooth=" + tieneBlueTooth +
+                super.printState() +
+                '}';
+    }
 }

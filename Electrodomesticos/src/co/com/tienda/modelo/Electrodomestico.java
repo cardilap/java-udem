@@ -30,7 +30,7 @@ public abstract class Electrodomestico {
     }
 
     public String printState(){
-        return new StringBuilder("nombre='")
+        return new StringBuilder(", nombre='")
                 .append(nombre!=null?nombre.toUpperCase():nombre).append('\'')
                 .append(", marca='").append(marca!=null?marca.toUpperCase():marca)
                 .append('\'').toString();

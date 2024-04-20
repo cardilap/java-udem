@@ -6,7 +6,7 @@ import co.com.tienda.modelo.EquipoSonido;
 
 public class Inventario {
     public final static int CAPACIDAD_TOTAL = 100;
-    Electrodomestico articulos[] = new Electrodomestico[CAPACIDAD_TOTAL];
+    Electrodomestico[] articulos = new Electrodomestico[CAPACIDAD_TOTAL];
 
     public void agregarElemento(Electrodomestico elemento){
 
@@ -15,7 +15,7 @@ public class Inventario {
     public int calcularValorTotal(){
         int total = 0;
 
-        for(Electrodomestico e : articulos){
+        for(Electrodomestico e : this.articulos){
             total += e.calcularValor();
         }
 
@@ -25,7 +25,15 @@ public class Inventario {
     public String mostrarInventario(){ //Ustedes la hacen
         StringBuilder sb = new StringBuilder();
 
-        for(Electrodomestico e : articulos){
+        /*
+        foreach: aplica a elementos iterables
+        iterador: auxiliar que devuelve cada elemento.
+        e: variable transitoria que va a recibir cada elemento
+
+        para cada articulo que esté en articulos asignelo a la variable e.
+        sin tener en cuenta: orden, tipo (herencia + polimorfismo)
+        */
+        for(Electrodomestico e : this.articulos){
             sb.append(e);
         }
 

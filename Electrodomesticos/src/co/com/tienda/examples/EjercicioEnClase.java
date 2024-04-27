@@ -13,12 +13,54 @@ package co.com.tienda.examples;
 *
 *  Definir un main que cree instancias de las 3 clases.
 * */
+class EntidadViviente{
+    private String genero;
+    /*
+    default:
+    public EntidadViviente(){
+        super();
+    }
+     */
+    public EntidadViviente(){
+        System.out.println("EntidadViviente");
+    }
+    public EntidadViviente(String genero){
+        this(); // se invoca el constructor sin argumentos, equivalente super()
+        System.out.println("linea 22: genero: " + genero);
+    }
+    public EntidadViviente(EntidadViviente origen){
+        this.genero = origen.genero;
+    }
+}
+class SerHumano extends EntidadViviente{
+    public SerHumano() {
+        System.out.println("SerHumano");
+    }
 
-class SerHumano{}
-class EntidadViviente{}
-class Colombiano{}
+    public SerHumano(String genero) {
+        super(genero);
+        System.out.println("linea 32");
+    }
+
+    public SerHumano(SerHumano origen) {
+        super(origen);
+    }
+}
+class Colombiano extends SerHumano{
+    public Colombiano() {
+        System.out.println("Colombiano");
+    }
+
+    public Colombiano(String genero) {
+        super(genero);
+        System.out.println("linea 42");
+    }
+}
 public class EjercicioEnClase {
     public static void main(String[] args) {
-
+        new Colombiano("femenino");
+        new SerHumano("masculino");
+        new EntidadViviente();
+        new EntidadViviente("masculino");
     }
 }

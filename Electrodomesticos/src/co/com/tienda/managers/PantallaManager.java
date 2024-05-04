@@ -9,7 +9,6 @@ public class PantallaManager extends ElectrodomesticoManager{ //Wrapper
 
     public PantallaManager(Pantalla instancia) {
         this.instancia = instancia;
-        super.register("Pantalla");
     }
 
     public Pantalla getInstancia() {

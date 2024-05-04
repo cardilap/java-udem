@@ -8,6 +8,8 @@ public class Inventario {
     private int valoresIngresados = 0; //variable de control: donde debo guardar
     private Electrodomestico[] articulos = new Electrodomestico[CAPACIDAD_TOTAL];
 
+
+
     public void agregarElemento_forma1(Electrodomestico elemento){
         //verificar si ya se llenó
         //se podria utilizar un for (no el foreach)

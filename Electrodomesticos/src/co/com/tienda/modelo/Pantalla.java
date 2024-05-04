@@ -24,6 +24,10 @@ public class Pantalla extends Electrodomestico {
 
     public Pantalla(int resolucion, String tipo, int pulgadas, boolean smart, String nombre, String marca) {
         super(nombre, marca);
+        this.init(resolucion, tipo, pulgadas,smart);
+    }
+
+    public void init(int resolucion, String tipo, int pulgadas, boolean smart){
         this.resolucion = resolucion;
         this.tipo = tipo;
         this.pulgadas = pulgadas;

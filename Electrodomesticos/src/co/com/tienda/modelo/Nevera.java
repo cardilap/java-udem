@@ -42,4 +42,9 @@ public class Nevera extends Electrodomestico {
                 super.printState() +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

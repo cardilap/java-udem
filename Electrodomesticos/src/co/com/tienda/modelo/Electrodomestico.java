@@ -1,7 +1,7 @@
 package co.com.tienda.modelo;
 
 
-public abstract class Electrodomestico {
+public abstract class Electrodomestico extends Object{
     protected String nombre = new String();
     protected String marca;
 

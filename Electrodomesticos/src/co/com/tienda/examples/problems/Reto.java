@@ -65,6 +65,10 @@ public class Reto {
         this.jugadores.add(player);
     }
 
+    public void addJugadores(Player[] players){
+        this.jugadores.addAll(Arrays.stream(players).toList());
+    }
+
     public void imprimir(){
         this.jugadores.sort(Comparator.comparingInt(Player::getPrimerLugar).reversed());
         for (Player player : this.jugadores) {
@@ -126,14 +130,23 @@ public class Reto {
     }
 
     public static void main(String[] args) {
+        Player[] jugadores = {
+                new Player(1,"David", David::retoDavid),
+                new Player(2,"Jorge opción 1", Jorge::retoDeJorge1),
+                new Player(3,"Jorge opción 2", Jorge::retoDeJorge2),
+                new Player(4,"Juan", Juan::retoDeJuan),
+                new Player(5,"Wilson", Wilson::retoWill),
+                new Player(6,"Nataly", Nataly::evaluarReto),
+        };
+        int prueba = -1;
         Reto primerReto = new Reto(false);
-        primerReto.addJugador(new Player(1,"David", David::retoDavid));
-        primerReto.addJugador(new Player(2,"Jorge", Jorge::retoDeJorge1));
-        primerReto.addJugador(new Player(3,"Jorge", Jorge::retoDeJorge2));
-        primerReto.addJugador(new Player(4,"Juan", Juan::retoDeJuan));
-        primerReto.addJugador(new Player(5,"Wilson", Wilson::retoWill));
-        primerReto.addJugador(new Player(6,"Nataly", Nataly::evaluarReto));
-        primerReto.run(1000);
-        primerReto.imprimir();
+        primerReto.addJugadores(jugadores);
+        if(prueba >= 0){
+            primerReto.test(jugadores[prueba]);
+        }
+        else{
+            primerReto.run(1000);
+            primerReto.imprimir();
+        }
     }
 }

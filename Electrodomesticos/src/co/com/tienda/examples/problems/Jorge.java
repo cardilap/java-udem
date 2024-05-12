@@ -11,7 +11,7 @@ public class Jorge {
             } else if (i % 11 == 0) {
                 resultado.append("Once\n");
             } else {
-                resultado.append(i).append("\n");
+                resultado.append(i).append("\n"); //no concatena
             }
         }
         return resultado.toString();

@@ -1,30 +1,82 @@
 package co.com.tienda.examples.problems;
 
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+class Player{
+    private int id;
+    private String nombre;
+    private Supplier solucion;
+    private int primerLugar;
+    private long tiempo;
+
+    public Player(int id, String nombre, Supplier solucion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.solucion = solucion;
+    }
+
+    public int getPrimerLugar() {
+        return primerLugar;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Supplier getSolucion() {
+        return solucion;
+    }
+
+    public long getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(long tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public void primerLugar(){
+        this.primerLugar++;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d. %s con %d nanosegundos",id,nombre,tiempo);
+    }
+
+    public String getScoreTotal() {
+        return String.format("%d. %s fue más rápido en %d ejecuciones",id,nombre,primerLugar);
+    }
+}
 public class Reto {
-    int[] results;
-    String[] nombres;
+    private List<Player> jugadores = new ArrayList<>();
     boolean log = false;
 
-    public Reto(int participantes, boolean log) {
-        this.results = new int[participantes];
+    public Reto(boolean log) {
         this.log = log;
     }
 
+    public void addJugador(Player player){
+        this.jugadores.add(player);
+    }
+
     public void imprimir(){
-        for (int i = 0; i < results.length; i++) {
-            //System.out.printf("# %d con %d ejecuciones\n", i, this.results[i]);
-            System.out.printf("# %d de %s fue más rápido en %d ejecuciones\n", i+1, this.nombres[i], this.results[i]);
+        this.jugadores.sort(Comparator.comparingInt(Player::getPrimerLugar).reversed());
+        for (Player player : this.jugadores) {
+            System.out.println(player.getScoreTotal());
         }
     }
 
-    public static int buscarElPrimero(long[] ops){
-        Map.Entry<Integer, Long> primero = IntStream.range(0, ops.length)
-                .mapToObj(x -> Map.entry(x, ops[x]))
+    public Player buscarElPrimero(){
+        Map.Entry<Player, Long> primero = this.jugadores.stream()
+                .map(x -> Map.entry(x, x.getTiempo()))
                 .min(Map.Entry.comparingByValue()).get();
         return primero.getKey();
     }
@@ -40,29 +92,31 @@ public class Reto {
         - que el método retorne todo lo que se a imprimir.
         */
 
-    public static long evaluarTiempo(Supplier<String> reto){
+    public long evaluarTiempo(Supplier<String> reto){
         long tiempo = System.nanoTime();
-        reto.get();
+        String print = reto.get();
+        if(log){
+            System.out.println(print);
+        }
         return System.nanoTime() - tiempo;
     }
 
+    public void test(Player player) {
+        this.log = true;
+        System.out.println("tiempo : " +  evaluarTiempo(player.getSolucion()));
+    }
+
     public void ejecucion() {
-        this.nombres = new String[]{"David", "Jorge", "Jorge", "Juan", "Wilson", "Nataly"};
-        long[] ops = {
-                evaluarTiempo(David::retoDavid),
-                evaluarTiempo(Jorge::retoDeJorge1),
-                evaluarTiempo(Jorge::retoDeJorge2),
-                evaluarTiempo(Juan::retoDeJuan),
-                evaluarTiempo(Wilson::retoWill),
-                evaluarTiempo(Nataly::evaluarReto),
-        };
-        int elmasRapido = buscarElPrimero(ops);
-        this.results[elmasRapido]++;
+        this.jugadores.stream().forEach(player -> {
+            player.setTiempo(evaluarTiempo(player.getSolucion()));
+        });
+        Player elmasRapido = buscarElPrimero();
+        elmasRapido.primerLugar();
 
         if(log) {
-            System.out.println("el mas rapido es " + elmasRapido + " de " + this.nombres[elmasRapido]);
-            for (int i = 0; i < ops.length; i++) {
-                System.out.printf("ejecución %d: %d\n", i, ops[i]);
+            System.out.printf("el mas rápido es %s \n", elmasRapido);
+            for (Player p : this.jugadores) {
+                System.out.printf("ejecución %s\n", p);
             }
         }
 
@@ -71,11 +125,16 @@ public class Reto {
         for (int i=0; i<total;i++){
             ejecucion();
         }
-        //Arrays.sort(this.results);
     }
 
     public static void main(String[] args) {
-        Reto primerReto = new Reto(6, false);
+        Reto primerReto = new Reto(false);
+        primerReto.addJugador(new Player(1,"David", David::retoDavid));
+        primerReto.addJugador(new Player(2,"Jorge", Jorge::retoDeJorge1));
+        primerReto.addJugador(new Player(3,"Jorge", Jorge::retoDeJorge2));
+        primerReto.addJugador(new Player(4,"Juan", Juan::retoDeJuan));
+        primerReto.addJugador(new Player(5,"Wilson", Wilson::retoWill));
+        primerReto.addJugador(new Player(6,"Nataly", Nataly::evaluarReto));
         primerReto.run(1000);
         primerReto.imprimir();
     }

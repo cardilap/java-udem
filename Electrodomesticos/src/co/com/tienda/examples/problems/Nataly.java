@@ -4,7 +4,7 @@ public class Nataly {
     public static String evaluarReto() {
         StringBuilder resultado = new StringBuilder();
 
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 100; i++) { //lo hace una vez menos
             if (i % 7 == 0 && i % 11 == 0) {
                 resultado.append("SieteOnce\n");
             } else if (i % 7 == 0) {

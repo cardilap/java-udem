@@ -2,8 +2,6 @@ package co.com.tienda.examples.problems;
 
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 class Player{
     private int id;

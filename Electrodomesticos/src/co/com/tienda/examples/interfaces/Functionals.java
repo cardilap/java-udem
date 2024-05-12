@@ -1,6 +1,6 @@
-package co.com.tienda.examples;
+package co.com.tienda.examples.interfaces;
 
-import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Functionals {
@@ -38,6 +38,7 @@ public class Functionals {
     public static void operator() {
 
     }
+
     public static void main(String[] args) {
         char opcion = 's';
         switch (opcion){
@@ -45,7 +46,34 @@ public class Functionals {
             case 'c': consumer(); break;
             case 'p': predicate(); break;
             case 'f': function(); break;
-            case 'o': operator();
+            case 'o': operator(); break;
+            case 'n': ejemplo(); break;
+            case 'i': nuevaInterfaz();
         }
+    }
+    public static void ejemplo() {
+        Supplier constructor1 = Registro::new;
+        Function<String,Registro> constructor2 = Registro::new;
+        constructor1.get();
+        constructor2.apply("Prueba");
+    }
+    public static void nuevaInterfaz() {
+        @FunctionalInterface
+        interface Nueva<T, U, Z, R> {
+            R procesar(T t, U u, Z z);
+        }
+        Nueva<String, String, String, Registro> funcional = Registro::new;
+        funcional.procesar("uno", "dos", "tres");
+    }
+}
+class Registro{
+    public Registro() {
+        System.out.println("Nueva Instancia");
+    }
+    public Registro(String nombre) {
+        System.out.println("Nueva Instancia llamada " + nombre);
+    }
+    public Registro(String nombre, String marca, String modelo) {
+        System.out.println("Nueva Instancia llamada " + nombre + " y " + marca + " y " + modelo);
     }
 }

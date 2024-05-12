@@ -25,7 +25,7 @@ class Ejemplo1 implements Modificable{
 
     }
 }
-class Ejemplo2 implements Facturable{
+class Ejemplo2 implements Facturable {
     @Override
     public void modificar() {
 

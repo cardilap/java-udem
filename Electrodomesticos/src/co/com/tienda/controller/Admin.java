@@ -41,9 +41,6 @@ public class Admin { //Singleton
             Poblable manager = config.<Electrodomestico,ElectrodomesticoManager>getManagerFactory().apply(instancia);
             miInventario.agregarElemento(instancia);
             manager.poblarElemento(this.miConsola,new Validador());
-            System.out.println(config);
-            System.out.println(instancia);
-            System.out.println(manager);
         }
     }
 

@@ -1,10 +1,10 @@
 package co.com.tienda.controller;
 
 import co.com.tienda.helpers.namespace.Namespace;
+import co.com.tienda.helpers.namespace.NamespaceEntry;
 import co.com.tienda.helpers.namespace.NamespaceFactory;
-import co.com.tienda.managers.ElectrodomesticoFactory;
-import co.com.tienda.managers.ElectrodomesticoManager;
-import co.com.tienda.modelo.Electrodomestico;
+import co.com.tienda.managers.*;
+import co.com.tienda.modelo.*;
 
 public class Admin { //Singleton
     private Consola miConsola;
@@ -15,6 +15,7 @@ public class Admin { //Singleton
     private Admin(){
         registro();
         miConsola = new Consola();
+        miInventario = new Inventario();
     }
     public static Admin getInstance(){
         if(unico == null){
@@ -26,18 +27,22 @@ public class Admin { //Singleton
 
     public void registro(){
         Namespace nm = NamespaceFactory.getInstance().getNamespace();
-        nm.register("Pantalla");
-        nm.register("Telefono");
-        nm.register("Nevera");
-        nm.register("EquipoSonido");
+        nm.register("Pantalla", Pantalla::new, PantallaManager::new);
+        nm.register("Telefono", Telefono::new, TelefonoManager::new);
+        nm.register("Nevera", Nevera::new, NeveraManager::new);
+        nm.register("EquipoSonido", EquipoSonido::new, EquipoSonidoManager::new);
     }
 
     public void crearElemento(){
-        String tipo = this.miConsola.crearElemento();
+        NamespaceEntry config = this.miConsola.menuCrearElemento();
 
-        if(tipo != null){
-            Electrodomestico instancia = ElectrodomesticoFactory.getElectrodomestico(tipo);
-            ElectrodomesticoManager manager = ElectrodomesticoFactory.getManager(instancia);
+        if(config != null){
+            Electrodomestico instancia = config.<Electrodomestico>getFactory().get();
+            Poblable manager = config.<Electrodomestico,ElectrodomesticoManager>getManagerFactory().apply(instancia);
+            miInventario.agregarElemento(instancia);
+            manager.poblarElemento(this.miConsola,new Validador());
+            System.out.println(config);
+            System.out.println(instancia);
             System.out.println(manager);
         }
     }

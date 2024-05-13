@@ -22,4 +22,37 @@ public class Wilson {
         return resultado.toString();
 
     }
+    public static String retoWillFestivo() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i < 101; i++) {
+            if (i % numero1 == 0 && i % numero2 == 0) {
+                result.append("SieteOnce\n");
+            } else if (i % numero1 == 0) {
+                result.append("Siete\n");
+            } else if (i % numero2 == 0) {
+                result.append("Once\n");
+            } else {
+                result.append(i).append("\n");
+            }
+
+        }
+        return result.toString();
+    }
+
+    public static String ultimoDelaMananaWill() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 1; i < 101; i++) {
+            if (i % 7 == 0 && i % 11 == 0) {
+                result.append("SieteOnce\n");
+            } else if (i % 7 == 0) {
+                result.append("Siete\n");
+            } else if (i % 11 == 0) {
+                result.append("Once\n");
+            } else {
+                result.append(i).append("\n");
+            }
+
+        }
+        return result.toString();
+    }
 }

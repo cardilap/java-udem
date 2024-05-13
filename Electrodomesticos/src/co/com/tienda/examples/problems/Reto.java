@@ -9,6 +9,8 @@ class Player{
     private Supplier solucion;
     private int primerLugar;
     private long tiempo;
+    private int ejecuciones;
+    private long promedio;
 
     public Player(int id, String nombre, Supplier solucion) {
         this.id = id;
@@ -38,6 +40,7 @@ class Player{
 
     public void setTiempo(long tiempo) {
         this.tiempo = tiempo;
+        this.ejecuciones++;
     }
 
     public void primerLugar(){
@@ -130,17 +133,22 @@ public class Reto {
     }
 
     public static void main(String[] args) {
+        int i =0;
         Player[] jugadores = {
-                new Player(1,"David", David::retoDavid),
-                new Player(2,"Jorge opción 1", Jorge::retoDeJorge1),
-                new Player(3,"Jorge opción 2", Jorge::retoDeJorge2),
-                new Player(4,"Juan", Juan::retoDeJuan),
-                new Player(5,"Wilson", Wilson::retoWill),
-                new Player(6,"Nataly", Nataly::evaluarReto),
+                new Player(++i,"David", David::retoDavid),
+                new Player(++i,"Jorge opción 1", Jorge::retoDeJorge1),
+                new Player(++i,"Jorge opción 2", Jorge::retoDeJorge2),
+                new Player(++i,"Juan", Juan::retoDeJuan),
+                new Player(++i,"Wilson", Wilson::retoWill),
+                new Player(++i,"Nataly", Nataly::evaluarReto),
+                new Player(++i,"Wilson festivo", Wilson::retoWillFestivo),
+                new Player(++i,"Wilson último de la mañana", Wilson::ultimoDelaMananaWill),
         };
+
         int prueba = -1;
         Reto primerReto = new Reto(false);
         primerReto.addJugadores(jugadores);
+
         if(prueba >= 0){
             primerReto.test(jugadores[prueba]);
         }

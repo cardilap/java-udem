@@ -37,5 +37,7 @@ public class Format {
         System.out.printf("full %1$tT%nhours %1$tH: minutes %1$tM: seconds %1$tS%n", date);
         System.out.printf("%1$tA, %1$tB %1$tY %n", date);
         System.out.printf("%1$td-%1$tm-%1$ty %n", date);
+
+        System.out.printf("%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n%s%n", new Object[]{"1", "2", "3", "4", "5", "6", "7", "8","9", "10"});
     }
 }

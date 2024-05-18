@@ -10,7 +10,7 @@ class Player{
     private int primerLugar;
     private long tiempo;
     private int ejecuciones;
-    private long promedio;
+    private Double promedio;
 
     public Player(int id, String nombre, Supplier solucion) {
         this.id = id;
@@ -41,6 +41,12 @@ class Player{
     public void setTiempo(long tiempo) {
         this.tiempo = tiempo;
         this.ejecuciones++;
+        if(this.ejecuciones == 1){
+            this.promedio = Double.valueOf(this.tiempo);
+        }
+        else{
+            this.promedio = this.promedio * (this.ejecuciones - 1)/this.ejecuciones + this.tiempo/this.ejecuciones;
+        }
     }
 
     public void primerLugar(){
@@ -53,7 +59,7 @@ class Player{
     }
 
     public String getScoreTotal() {
-        return String.format("%d. %s fue más rápido en %d ejecuciones",id,nombre,primerLugar);
+        return String.format("%d. %s fue más rápido en %d ejecuciones con promedio %5.2f",id,nombre,primerLugar,promedio);
     }
 }
 public class Reto {
@@ -135,19 +141,22 @@ public class Reto {
     public static void main(String[] args) {
         int i =0;
         Player[] jugadores = {
+                //new Player(++i,"Prueba", RetoDelProfe::unformenos),
                 new Player(++i,"David", David::retoDavid),
                 new Player(++i,"Jorge opción 1", Jorge::retoDeJorge1),
                 new Player(++i,"Jorge opción 2", Jorge::retoDeJorge2),
                 new Player(++i,"Juan", Juan::retoDeJuan),
-                new Player(++i,"Wilson", Wilson::retoWill),
+                new Player(++i,"Wilson 1", Wilson::retoWill),
                 new Player(++i,"Nataly", Nataly::evaluarReto),
-                new Player(++i,"Wilson festivo", Wilson::retoWillFestivo),
-                new Player(++i,"Wilson último de la mañana", Wilson::ultimoDelaMananaWill),
+                new Player(++i,"Wilson 2 festivo", Wilson::retoWillFestivo),
+                new Player(++i,"Wilson 3 último de la mañana", Wilson::ultimoDelaMananaWill),
+                new Player(++i,"Daniel del viernes", Daniel::validarDivisores),
         };
 
         int prueba = -1;
         Reto primerReto = new Reto(false);
         primerReto.addJugadores(jugadores);
+        //primerReto.addJugadores(RetoDelProfe.jugadoresDelProfe());
 
         if(prueba >= 0){
             primerReto.test(jugadores[prueba]);

@@ -1,7 +1,8 @@
 package co.com.tienda.examples.archivos;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Ejecucion {
     static class MiHilo extends Thread{
@@ -19,7 +20,7 @@ public class Ejecucion {
         }
     }
 
-    public static void main(String[] args) {
+    public static void hilos() {
         //procesos un hilo principal
         MiHilo h1 = new MiHilo("hilo 1: ");
         MiHilo h2 = new MiHilo("hilo 2: ");
@@ -31,9 +32,21 @@ public class Ejecucion {
     public static void launcher() throws IOException {
         String[] cmd = {"cmd", "/c", "java -version"};
         ProcessBuilder pb = new ProcessBuilder(cmd);
-        pb.redirectOutput(new File("salida.txt"));
-        pb.start();
+        //pb.redirectOutput(new File("salida.txt"));
+        Process proceso = pb.start();
+        BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getErrorStream()));
+        String line;
+        while (true) {
+            line = br.readLine();
+            if (line == null) {
+                break;
+            }
+            System.out.println(line);
+        }
 
+    }
 
+    public static void main(String[] args) throws IOException {
+        launcher();
     }
 }

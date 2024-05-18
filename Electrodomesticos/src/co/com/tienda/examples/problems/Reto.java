@@ -150,7 +150,12 @@ public class Reto {
                 new Player(++i,"Nataly", Nataly::evaluarReto),
                 new Player(++i,"Wilson 2 festivo", Wilson::retoWillFestivo),
                 new Player(++i,"Wilson 3 último de la mañana", Wilson::ultimoDelaMananaWill),
-                new Player(++i,"Daniel del viernes", Daniel::validarDivisores),
+                new Player(++i,"Daniel 1 del viernes", Daniel::validarDivisores),
+                new Player(++i,"Daniel 2 del sábado", Daniel::validarDivisoresV2),
+                new Player(++i,"Daniel 3 del sábado", Daniel::validarDivisoresV3),
+                new Player(++i,"Explicacion continues", Explicacion::solucion1),
+                new Player(++i,"Explicacion 2 ciclos", Explicacion::solucion2),
+                new Player(++i,"Explicacion 3 ciclos", Explicacion::solucion3),
         };
 
         int prueba = -1;

@@ -20,10 +20,13 @@ public class TCPServer extends Thread{
             System.out.println("Se conecta " + con.getInetAddress().getHostAddress());
             DataInputStream dis = new DataInputStream(con.getInputStream());
             PrintStream ps = new PrintStream(con.getOutputStream());
-            while (dis.available() > 0){
-                System.out.println(dis.readLine());
-                ps.println("recibido");
+            String lee = null;
+            do{
+                lee = dis.readLine();
+                System.out.println("server recibe: " + lee);
+                ps.println("Gracias");
             }
+            while (!lee.equalsIgnoreCase("exit"));
         }
         catch (IOException e) {
             e.printStackTrace();

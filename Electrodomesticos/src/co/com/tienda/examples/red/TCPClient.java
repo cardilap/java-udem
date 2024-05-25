@@ -20,9 +20,12 @@ public class TCPClient extends Thread{
             PrintStream ps = new PrintStream(cliente.getOutputStream());
             DataInputStream dis = new DataInputStream(cliente.getInputStream());
             ps.println("Hola");
-            while (dis.available() > 0){
-                System.out.println(dis.readLine());
-            }
+            String lee = null;
+            do{
+                lee = dis.readLine();
+                System.out.println("cliente recibe: " + lee);
+            }while (!lee.equalsIgnoreCase("exit"));
+
         }catch (IOException e) {
             e.printStackTrace();
         }

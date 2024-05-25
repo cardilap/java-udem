@@ -8,7 +8,7 @@ public class Principal {
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
-
+            e.printStackTrace();
         }
         TCPClient cli = new TCPClient("127.0.0.1", puerto);
         cli.start();

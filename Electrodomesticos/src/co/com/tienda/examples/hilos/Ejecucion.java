@@ -1,6 +1,7 @@
-package co.com.tienda.examples.archivos;
+package co.com.tienda.examples.hilos;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -32,7 +33,6 @@ public class Ejecucion {
     public static void launcher() throws IOException {
         String[] cmd = {"cmd", "/c", "java -version"};
         ProcessBuilder pb = new ProcessBuilder(cmd);
-        //pb.redirectOutput(new File("salida.txt"));
         Process proceso = pb.start();
         BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getErrorStream()));
         String line;
@@ -46,7 +46,14 @@ public class Ejecucion {
 
     }
 
+    public static void launcherJava() throws IOException {
+        String[] cmd = {"cmd", "/c", "java -version"};
+        ProcessBuilder pb = new ProcessBuilder(cmd);
+        pb.redirectError(new File("salida.txt"));
+        Process proceso = pb.start();
+    }
+
     public static void main(String[] args) throws IOException {
-        launcher();
+        launcherJava();
     }
 }
